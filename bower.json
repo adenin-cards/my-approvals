@@ -1,6 +1,6 @@
 {
   "name": "my-approvals",
-  "version": "0.0.1.457",
+  "version": "0.0.1.87",
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#master"

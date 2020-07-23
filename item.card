@@ -7,103 +7,99 @@ properties:
     view: |-
       <div class="container layout-vertical">
       	{% if approved == false and declined == false %}
-      		<div class="layout-horizontal background-white">
-      			{% if avatar %}
-      				<div class="layout-start py pl">
-      					<img style="width: 60px; height: 60px; display: block; background-image: url('{{avatar}}');background-color:lightgrey;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%;;border-radius: 50%;">
+      		<div class="layout-horizontal background-white mx py bb">
+      			<div class="layout-vertical">
+      				<div class="font-title blue">{{title}}</div>
+      				<div class="font-body1 ptsm">{{description}}</div>
+      				<div class="layout-horizontal ptsm">
+      					<iron-image src="{{thumbnail}}" sizing="cover" preload style="width:24px;height:24px"></iron-image>
+      					<div class="font-body2 plsm">{{integration}}</div>
       				</div>
-      			{% endif %}
-      			<div class="layout-flex layout-vertical pl">
-      				<div class="layout-inline">
-      					<div class="font-subhead pt layout-start layout-flex-auto" style="color: #58585b;">
-      						{{title}}
-      					</div>
-        				<div class="layout-end">
-      						<at-carbon-moment datetime="{{date}}" from-now ago class="font-caption pt pr grey"></at-carbon-moment>
-      					</div>
-      				</div>
-      				<div class="pbsm pr container layout-vertical black">
-      					{% if type %}
-      						<div class="font-body1" style="margin-top: 3px; margin-bottom: 3px;">
-      							{{type}}
-      						</div>
-      					{% endif %}
-      					{% if description %}
-      						{% capture bodyLength %}{{description | size}}{% endcapture %}
-      						{% if bodyLength < 88 %}
-      							<div class="font-caption dark-grey">
-      								{{description}}
-      							</div>	
-      						{% else %}
-      							<div class="font-caption dark-grey" style="cursor: pointer;" at-click-action="expandBody">
-      								{% if expanded == true %}
-      									<div class="layout-vertical">
-      										<div class="pbsm">
-      											{{description}}
-      										</div>
-      										<div class="layout-horizontal layout-end-justified">
-      											<at-carbon-icon icon="now:caret-up" class="grey approval-caret-icon"></at-carbon-icon>
-      										</div>
-      									</div>
-      								{% else %}
-      									<div class="layout-vertical">
-      										<div class="pbsm">
-      											{{description |  truncatewords: 8}}
-                          </div>
-      										<div class="layout-horizontal layout-end-justified">
-      											<at-carbon-icon icon="now:caret-down" class="grey approval-caret-icon"></at-carbon-icon>
-      										</div>
-      									</div>
-      								{% endif %}
-      							</div>
-      						{% endif %}
-      					{% endif %}
-      					<div class="font-button layout-horizontal ptsm">
-      						<div class="ml0 green" at-click-action="quickApprove" at-agent-action="approve" style="cursor:pointer">Approve</div>
-      						<div class="ml red" at-click-action="quickDecline" at-agent-action="reject" style="cursor:pointer">Decline</div>
-      					</div>
-      				</div>
-      				<div class="bb pt"></div>
+      			</div>
+      			<div class="layout-horizontal layout-center layout-end-justified approval-btn-container">
+      				<div class="approval-btn approve-btn layout-horizontal layout-center" at-click-action="quickApprove"><at-carbon-icon class="approval-ico" icon="now:checkmark"></at-carbon-icon><span class="approval-btn-text">Approve</span></div>
+      				<div class="approval-btn decline-btn layout-horizontal layout-center" at-click-action="quickDecline"><at-carbon-icon class="approval-ico" icon="now:cancel"></at-carbon-icon></div>
       			</div>
       		</div>
       	{% elsif approved == true %}
       		<div class="psm layout-horizontal" style="background-color: #E3F2E3;">
       			<at-carbon-icon icon="now:checkmark" class="" style="color: #43A942;"></at-carbon-icon>
-      			<div class="plsm font-caption" style="margin-top: 2px;">
-      				Approved request.
-      			</div>
+      			<div class="plsm font-caption" style="margin-top: 2px;">Approved request.</div>
       		</div>
         {% elsif declined == true %}
         	<div class="psm layout-horizontal" style="background-color: #f2e2e2;">
       			<at-carbon-icon icon="now:cancel" class="" style="color: #a84141;"></at-carbon-icon>
-      			<div class="plsm font-caption" style="margin-top: 2px;">
-      				Declined request.
-      			</div>
+      			<div class="plsm font-caption" style="margin-top: 2px;">Declined request.</div>
       		</div>
       	{% endif %}
       </div>
 
       <style>
-      .aprroval-caret-icon {
-        width: 12px;
-        height: 12px;
-      }
+        .approval-btn-container {
+        	min-width: 120px;
+          margin-left: auto;
+        }
+        
+        .approval-ico {
+        	width: 16px;
+          height: 16px;
+          color: white;
+        }
+        
+        .approval-btn {
+        	height: 32px;
+          padding-left: 6px;
+          padding-right: 6px;
+          transition: .2s;
+        }
+        
+        .approval-btn-text {
+        	font-weight: 400;
+          padding-left: 4px;
+          line-height: 24px;
+          color: white;
+        }
+        
+        .approval-btn:hover {
+        	cursor: pointer;
+        }
+        
+        .approve-btn {
+          background-color: #5cb85c;
+          border-radius: 5px 0px 0px 5px;
+        }
+        
+        .approve-btn:hover {
+        	background-color: #218838;
+        }
+        
+        .decline-btn {
+          background-color: #d9534f;
+          border-radius: 0px 5px 5px 0px;
+        }
+        
+        .decline-btn:hover {
+        	background-color: #c82333;
+        }
       </style>
     actionListeners:
       - _all
     modelRoot: state.model
+    model: 
+    value: 
 $meta:
-  cardId: !!int 35
+  cardId: -1
   preview-mode: live
   preview-container: item
   search-term: 
   service-url: 
   preview-data: |-
     {
-      "id": "1054889",
-      "title": "PTO Request",
-      "link": "https://www.adenin.com/pocdef",
-      "date": "2019-06-17T10:08:17.051Z"
+      "title": "Equipment Request from Marlon Greenfelder",
+      "description": "Work from Home - Company PC",
+      "integration": "SAP Concur",
+      "thumbnail": "https://www.adenin.com/assets/images/wp-images/logo/sap-concur.svg",
+      "date": "2020-07-22T11:54:00.000Z"
     }
   xclass: 
   xstyle: 
