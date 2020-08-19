@@ -12,7 +12,7 @@ properties:
       				<div class="font-title blue">{{title}}</div>
       				<div class="font-body1 ptsm">{{description}}</div>
       				<div class="layout-horizontal ptsm">
-      					{% if thumbnail %}<iron-image class="prsm" src="{{thumbnail}}" sizing="cover" preload style="width:24px;height:24px"></iron-image>{% endif %}
+      					{% if thumbnail %}<iron-image class="mrsm" src="{{thumbnail}}" sizing="cover" preload style="width:24px;height:24px"></iron-image>{% endif %}
       					<div class="font-body2">{{integration}}</div>
       				</div>
       			</div>
